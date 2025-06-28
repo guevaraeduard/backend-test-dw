@@ -1,19 +1,24 @@
-import { Prop,Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 
 @Schema()
 export class User extends Document {
     @Prop({
-        index:true
+        index: true
     })
     name: string;
     @Prop({
         unique: true,
-        index:true
+        index: true
     })
     email: string;
     @Prop()
     password: string;
+    @Prop({
+        default: 'user',
+        enum: ['user', 'admin', 'superadmin'] // Roles permitidos
+    })
+    role: string;
     @Prop({
         default: Date.now
     })
@@ -27,7 +32,7 @@ export class User extends Document {
 export const UserSchema = SchemaFactory.createForClass(User);
 
 // Hook para operaciones de guardado
-UserSchema.pre('save', function(next) {
+UserSchema.pre('save', function (next) {
     if (this.email) {
         this.email = this.email.toLowerCase().trim();
     }
@@ -35,7 +40,7 @@ UserSchema.pre('save', function(next) {
 });
 
 // Hook para operaciones de actualización
-UserSchema.pre('findOneAndUpdate', function(next) {
+UserSchema.pre('findOneAndUpdate', function (next) {
     const update = this.getUpdate() as any;
     if (update.email) {
         update.email = update.email.toLowerCase().trim();

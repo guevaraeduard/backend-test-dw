@@ -34,8 +34,8 @@ export class AuthService {
   }
 
   async login(loginDto: LoginDto) {
-    const { email, password } = loginDto;
-    const user = await this.userModel.findOne({ email });
+    const { email, password, type = 'admin' } = loginDto;
+    const user = await this.userModel.findOne({ email, role: type });
     if (!user) {
       throw new BadRequestException('Usuario o contraseña incorrectos');
     }
