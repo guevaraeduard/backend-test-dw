@@ -6,10 +6,10 @@ import { User, UserSchema } from '../entities/user.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
-import { AuthGuardP } from './guards/auth.guard';
+
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy, AuthGuardP],
+  providers: [AuthService, JwtStrategy],
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
@@ -19,6 +19,6 @@ import { AuthGuardP } from './guards/auth.guard';
       signOptions: { expiresIn: '1h' },
     }),
   ],
-  exports: [AuthService, JwtStrategy, PassportModule, JwtModule, AuthGuardP],
+  exports: [AuthService, JwtStrategy, PassportModule, JwtModule],
 })
 export class AuthModule { }
