@@ -10,7 +10,7 @@ import { PedidosModule } from './pedidos/pedidos.module';
 @Module({
   imports: [
     AuthModule,
-    MongooseModule.forRoot('mongodb+srv://guevaraeduard97:Eduard1997@cluster0.pouzdxy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'),
+    MongooseModule.forRoot(process.env.MONGODB_URI || 'mongodb+srv://guevaraeduard97:Eduard1997@cluster0.pouzdxy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'),
     CategoryModule,
     ProductModule,
     FilesModule,
