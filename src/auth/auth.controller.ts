@@ -33,4 +33,10 @@ export class AuthController {
     };
   }
 
+  @Get('users')
+  @Auth()
+  getUsers() {
+    return this.authService.getUsers();
+  }
+
 }

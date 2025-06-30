@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -11,13 +11,14 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Post()
+  
   create(@Body() createProductDto: CreateProductDto) {
     return this.productService.create(createProductDto);
   }
 
   @Get()
-  findAll() {
-    return this.productService.findAll();
+  findAll(@Query() query: { category: string, search: string }) {
+    return this.productService.findAll(query.category, query.search);
   }
 
   @Get(':id')
@@ -33,5 +34,10 @@ export class ProductController {
   @Delete(':id')
   remove(@Param('id', ParseMongoIdPipe) id: string) {
     return this.productService.remove(id);
+  }
+
+  @Patch('change-active/:id')
+  changeActive(@Param('id', ParseMongoIdPipe) id: string) {
+    return this.productService.changeActive(id);
   }
 }

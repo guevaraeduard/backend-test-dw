@@ -22,7 +22,7 @@ export class Category extends Document {
     @Prop({
         default: true
     })
-    status: boolean;
+    active: boolean;
     @Prop({
         default: Date.now
     })

@@ -4,6 +4,8 @@ import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
 import { FilesModule } from './files/files.module';
+import { FrontendModule } from './frontend/frontend.module';
+import { PedidosModule } from './pedidos/pedidos.module';
 
 @Module({
   imports: [
@@ -11,7 +13,9 @@ import { FilesModule } from './files/files.module';
     MongooseModule.forRoot('mongodb+srv://guevaraeduard97:Eduard1997@cluster0.pouzdxy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'),
     CategoryModule,
     ProductModule,
-    FilesModule
+    FilesModule,
+    FrontendModule,
+    PedidosModule
   ],
   controllers: [],
   providers: [],

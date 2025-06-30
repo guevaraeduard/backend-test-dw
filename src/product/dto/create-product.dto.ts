@@ -1,4 +1,4 @@
-import { IsNotEmpty,  IsString, IsOptional, IsMongoId, IsNumber } from "class-validator";
+import { IsNotEmpty,  IsString, IsOptional, IsMongoId, IsNumber, IsArray } from "class-validator";
 
 export class CreateProductDto {
     @IsString({message: 'El nombre debe ser un texto'})
@@ -14,7 +14,7 @@ export class CreateProductDto {
     description_short: string;
 
     @IsOptional()
-    description_large: string;
+    description: string;
 
     @IsString({message: 'La categoria debe ser un texto valido'})
     @IsNotEmpty({message: 'La categoria es requerida'})
@@ -29,13 +29,12 @@ export class CreateProductDto {
     @IsNotEmpty({message: 'El precio es requerido'})
     price: number;
 
-    @IsNumber()
-    @IsNotEmpty({message: 'El precio original es requerido'})
+    @IsOptional()
     price_original: number;
 
     @IsNumber()
     @IsNotEmpty({message: 'El stock es requerido'})
-    stok: number;
+    stock: number;
     
     @IsOptional()
     warranty: string;
@@ -47,10 +46,12 @@ export class CreateProductDto {
     dimensions: string; 
 
     @IsOptional()
-    characteristics: string;
+    @IsArray({message: 'Las características deben ser un array'})
+    characteristics: string[];
 
     @IsOptional()
-    tags: string;
+    @IsArray({message: 'Los tags deben ser un array'})
+    tags: string[];
 
     @IsOptional()
     active: boolean;

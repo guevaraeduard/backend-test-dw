@@ -57,4 +57,12 @@ export class AuthService {
     const token = this.jwtService.sign(payload);
     return token;
   }
+
+  async getUsers() {
+
+    const users = await this.userModel.find({role: 'user'});
+    
+    return users
+  }
+
 }

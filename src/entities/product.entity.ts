@@ -25,13 +25,13 @@ export class Product extends Document {
     @Prop({
         default: null
     })
-    description_large: string;
+    description: string;
     @Prop()
     price: number;
     @Prop()
     price_original: number;
     @Prop()
-    stok: number;
+    stock: number;
     @Prop({
         default: null
     })
@@ -47,13 +47,13 @@ export class Product extends Document {
     @Prop({
         default: null
     })
-    characteristics: string;
+    characteristics: string[];
     @Prop()
     image: string;
     @Prop({
         default: null
     })
-    tags: string;
+    tags: string[];
     @Prop({
         default: true
     })
@@ -74,6 +74,10 @@ export class Product extends Document {
         default: Date.now
     })
     updatedAt: Date;
+    @Prop({
+        default: null
+    })
+    slug: string;
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);

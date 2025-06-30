@@ -30,8 +30,15 @@ export class CategoryController {
     return this.categoryService.update(id, updateCategoryDto);
   }
 
+  @Patch('change-active/:id')
+  changeActive(@Param('id', ParseMongoIdPipe) id: string) {
+    return this.categoryService.changeActive(id);
+  }
+
   @Delete(':id')
   remove(@Param('id', ParseMongoIdPipe) id: string) {
     return this.categoryService.remove(id);
   }
+
+
 }
